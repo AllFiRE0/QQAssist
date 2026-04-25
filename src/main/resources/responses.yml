@@ -1,0 +1,149 @@
+rules:
+  greeting:
+    delay_ticks: 0
+    permission: ""
+    symbol: ""
+    condition: ""
+    priority: 100
+    chance: 100
+    cooldown_ticks: 40
+    
+    questions:
+      exact:
+        - "привет"
+        - "здравствуйте"
+        - "здарова"
+      regex:
+        - "(?i)прив(ет|iвет|эт)"
+        - "(?i)хай"
+        - "(?i)hello"
+        - "(?i)ку"
+      contains: []
+    
+    answers:
+      - "sound! ENTITY_PLAYER_LEVELUP 1.0 1.5"
+    
+    random_answers:
+      - "message! &a&lQQ &7» &fПривет, %player_name%!"
+      - "message! &a&lQQ &7» &fЗдарова, %player_name%!"
+      - "message! &a&lQQ &7» &fПриветствую!"
+
+  farewell:
+    delay_ticks: 0
+    permission: ""
+    symbol: ""
+    condition: ""
+    priority: 90
+    chance: 100
+    cooldown_ticks: 40
+    
+    questions:
+      exact:
+        - "пока"
+        - "до свидания"
+      regex:
+        - "(?i)(bye|goodbye|бай)"
+      contains: []
+    
+    answers:
+      - "sound! ENTITY_VILLAGER_NO 1.0 1.0"
+    
+    random_answers:
+      - "message! &a&lQQ &7» &fПока, %player_name%!"
+      - "message! &a&lQQ &7» &fДо встречи!"
+
+  how_are_you:
+    delay_ticks: 0
+    permission: ""
+    symbol: ""
+    condition: ""
+    priority: 80
+    chance: 100
+    cooldown_ticks: 60
+    
+    questions:
+      exact:
+        - "как дела"
+        - "как ты"
+      regex:
+        - "(?i)(how are you|how r u)"
+      contains: []
+    
+    answers: []
+    
+    random_answers:
+      - "message! &a&lQQ &7» &fУ меня всё отлично! А у тебя?"
+      - "message! &a&lQQ &7» &fСупер! Как сам?"
+
+  thanks:
+    delay_ticks: 0
+    permission: ""
+    symbol: ""
+    condition: ""
+    priority: 70
+    chance: 100
+    cooldown_ticks: 30
+    
+    questions:
+      exact:
+        - "спасибо"
+        - "спс"
+      regex:
+        - "(?i)(thanks|thx|thank you)"
+      contains: []
+    
+    answers:
+      - "sound! ENTITY_EXPERIENCE_ORB_PICKUP 1.0 1.0"
+    
+    random_answers:
+      - "message! &a&lQQ &7» &fПожалуйста, %player_name%!"
+      - "message! &a&lQQ &7» &fВсегда рад помочь!"
+
+  who_are_you:
+    delay_ticks: 0
+    permission: ""
+    symbol: ""
+    condition: ""
+    priority: 60
+    chance: 100
+    cooldown_ticks: 60
+    
+    questions:
+      exact:
+        - "ты кто"
+        - "кто ты"
+      regex: []
+      contains: []
+    
+    answers: []
+    
+    random_answers:
+      - "message! &a&lQQ &7» &fЯ QQAssist — чат-бот этого сервера!"
+      - "message! &a&lQQ &7» &fЯ бот-помощник!"
+
+  help:
+    delay_ticks: 0
+    permission: ""
+    symbol: "!"
+    condition: ""
+    priority: 50
+    chance: 100
+    cooldown_ticks: 100
+    
+    questions:
+      exact:
+        - "помоги"
+        - "помощь"
+        - "хелп"
+      regex:
+        - "(?i)(help|помогите)"
+      contains: []
+    
+    answers: []
+    
+    random_answers:
+      - "message! &a&lQQ &7» &fПомощь:"
+      - "message! &7  &e/menu &7- меню"
+      - "message! &7  &e/rules &7- правила"
+      - "message! &7  &e/shop &7- магазин"
+      - "message! &7  &e/qqassist &7- инфо о плагине"
