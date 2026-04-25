@@ -13,9 +13,9 @@ import ru.allfire.qqassist.miniapp.MiniAppServer;
 import ru.allfire.qqassist.placeholder.QQExpansion;
 
 public final class QQAssist extends JavaPlugin {
-    
+
     private static QQAssist instance;
-    
+
     private ConfigManager configManager;
     private Lang lang;
     private ShopConfig shopConfig;
@@ -24,57 +24,50 @@ public final class QQAssist extends JavaPlugin {
     private ChatBotManager chatBotManager;
     private TelegramManager telegramManager;
     private MiniAppServer miniAppServer;
-    
+
     @Override
     public void onEnable() {
         instance = this;
         long start = System.currentTimeMillis();
-        
+
         getLogger().info("§8[§aQQAssist§8] §7Starting...");
-        
-        // Конфиги
+
         configManager = new ConfigManager(this);
         configManager.loadAll();
-        
+
         lang = new Lang(this);
         lang.load();
-        
+
         shopConfig = new ShopConfig(this);
         shopConfig.load();
-        
+
         responsesConfig = new ResponsesConfig(this);
         responsesConfig.load();
-        
-        // База данных
+
         databaseManager = new DatabaseManager(this);
         databaseManager.init();
-        
-        // Менеджеры
+
         chatBotManager = new ChatBotManager(this);
         chatBotManager.loadRules();
         getServer().getPluginManager().registerEvents(chatBotManager, this);
-        
+
         telegramManager = new TelegramManager(this);
-        
-        // Mini App HTTP сервер
+
         if (configManager.getMainConfig().getBoolean("miniapp.http_server.enabled", true)) {
             miniAppServer = new MiniAppServer(this);
             miniAppServer.start();
         }
-        
-        // Команды
+
         registerCommands();
-        
-        // PlaceholderAPI
+
         if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             new QQExpansion(this).register();
             getLogger().info("§8[§aQQAssist§8] §aPlaceholderAPI expansion registered");
         }
-        
+
         getLogger().info("§8[§aQQAssist§8] §aEnabled in §f" + (System.currentTimeMillis() - start) + "ms");
-        getLogger().info("§8[§aQQAssist§8] §7Author: §fAllF1RE");
     }
-    
+
     @Override
     public void onDisable() {
         if (miniAppServer != null) {
@@ -85,7 +78,7 @@ public final class QQAssist extends JavaPlugin {
         }
         getLogger().info("§8[§aQQAssist§8] §cDisabled");
     }
-    
+
     private void registerCommands() {
         var qq = getCommand("qqassist");
         if (qq != null) {
@@ -93,25 +86,25 @@ public final class QQAssist extends JavaPlugin {
             qq.setExecutor(cmd);
             qq.setTabCompleter(cmd);
         }
-        
+
         var report = getCommand("report");
         if (report != null) report.setExecutor(new ReportCommand(this));
-        
+
         var checkin = getCommand("checkin");
         if (checkin != null) checkin.setExecutor(new CheckinCommand(this));
-        
+
         var qqpoints = getCommand("qqpoints");
         if (qqpoints != null) qqpoints.setExecutor(new QQPointsCommand(this));
-        
+
         var qqshop = getCommand("qqshop");
         if (qqshop != null) qqshop.setExecutor(new QQShopCommand(this));
-        
+
         var qqlink = getCommand("qqlink");
         if (qqlink != null) qqlink.setExecutor(new QQLinkCommand(this));
-        
+
         var qqunlink = getCommand("qqunlink");
         if (qqunlink != null) qqunlink.setExecutor(new QQUnlinkCommand(this));
-        
+
         var qqadmin = getCommand("qqadmin");
         if (qqadmin != null) {
             var cmd = new QQAdminCommand(this);
@@ -119,7 +112,7 @@ public final class QQAssist extends JavaPlugin {
             qqadmin.setTabCompleter(cmd);
         }
     }
-    
+
     public void reload() {
         configManager.reloadAll();
         lang.load();
@@ -128,7 +121,7 @@ public final class QQAssist extends JavaPlugin {
         chatBotManager.loadRules();
         getLogger().info("§8[§aQQAssist§8] §aConfiguration reloaded");
     }
-    
+
     public static QQAssist getInstance() { return instance; }
     public ConfigManager getConfigManager() { return configManager; }
     public Lang getLang() { return lang; }
