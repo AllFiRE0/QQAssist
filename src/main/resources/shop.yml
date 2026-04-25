@@ -1,0 +1,75 @@
+shop:
+  enabled: true
+  title: "🛒 Магазин сервера"
+  description: "Покупайте товары за check-in очки!"
+  currency_name: "очков"
+  currency_icon: "⭐"
+  require_linked: true
+  
+  messages:
+    buy_success: "✅ Вы купили %item% за %cost% %currency%!"
+    buy_fail_not_enough: "❌ Недостаточно очков!"
+    buy_fail_not_linked: "❌ Привяжите аккаунт!"
+    buy_fail_cooldown: "⏳ Товар можно купить раз в %cooldown%"
+  
+  categories:
+    food:
+      name: "🍔 Еда"
+      icon: "🍔"
+      items:
+        bread:
+          name: "🍞 Хлеб"
+          cost: 5
+          commands:
+            - "asConsole! give %player_name% bread 1"
+            - "message! &aВы купили хлеб за 5 очков!"
+        golden_apple:
+          name: "🍎 Золотое яблоко"
+          cost: 50
+          cooldown_minutes: 60
+          commands:
+            - "asConsole! give %player_name% golden_apple 1"
+    
+    resources:
+      name: "💎 Ресурсы"
+      icon: "💎"
+      items:
+        diamond:
+          name: "💎 Алмаз"
+          cost: 100
+          commands:
+            - "asConsole! give %player_name% diamond 1"
+        iron_block:
+          name: "🔩 Блок железа"
+          cost: 80
+          commands:
+            - "asConsole! give %player_name% iron_block 1"
+    
+    perks:
+      name: "🌟 Услуги"
+      icon: "🌟"
+      items:
+        fly:
+          name: "🕊 Полёт 30 мин"
+          cost: 200
+          cooldown_minutes: 120
+          commands:
+            - "asConsole! cmi fly %player_name% 30m"
+        heal:
+          name: "❤ Исцеление"
+          cost: 15
+          cooldown_minutes: 5
+          commands:
+            - "asConsole! heal %player_name%"
+            - "asConsole! feed %player_name%"
+    
+    kits:
+      name: "🎒 Наборы"
+      icon: "🎒"
+      items:
+        starter:
+          name: "🎒 Стартовый"
+          cost: 50
+          cooldown_minutes: 1440
+          commands:
+            - "asConsole! kit starter %player_name%"
