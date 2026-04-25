@@ -1,0 +1,348 @@
+# Режим отладки
+debug: false
+
+# ============================================
+# БАЗА ДАННЫХ
+# ============================================
+database:
+  type: "sqlite"
+  sqlite:
+    file: "database.db"
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "qqassist"
+    username: "root"
+    password: ""
+
+# ============================================
+# ЧАТ-БОТ
+# ============================================
+chatbot:
+  enabled: true
+  permission_usage: ""
+  global_cooldown_ticks: 40
+  ignore_self: true
+  log_triggers: true
+  max_message_length: 256
+  
+  exclusions:
+    permissions:
+      - "qqassist.bypass.chat"
+    players: []
+    groups: []
+
+# ============================================
+# TELEGRAM ИНТЕГРАЦИЯ
+# ============================================
+telegram:
+  enabled: false
+  tgbridge:
+    token: "your_token_here"
+    port: 45678
+  chats:
+    global: "-1001111111111"
+    admin: "-1002222222222"
+    reports: "-1003333333333"
+
+# ============================================
+# MINI APP
+# ============================================
+miniapp:
+  http_server:
+    enabled: true
+    port: 45679
+    host: "0.0.0.0"
+    external_url: "http://localhost:45679"
+  
+  display:
+    title: "QQAssist"
+    default_tab: "home"
+  
+  theme:
+    respect_telegram_theme: true
+    
+    light:
+      background_color: "#ffffff"
+      card_background: "#f0f0f0"
+      primary_color: "#007aff"
+      secondary_color: "#5856d6"
+      success_color: "#34c759"
+      danger_color: "#ff3b30"
+      warning_color: "#ff9500"
+      text_color: "#1c1c1e"
+      text_secondary: "#8e8e93"
+      button_color: "#007aff"
+      button_text: "#ffffff"
+      input_background: "#f0f0f0"
+      input_border: "#c7c7cc"
+      divider_color: "#e5e5ea"
+      fonts:
+        family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+        size_small: "12px"
+        size_normal: "15px"
+        size_large: "18px"
+        size_title: "22px"
+        size_points: "36px"
+      border_radius: "12px"
+      card_shadow: "0 2px 8px rgba(0,0,0,0.1)"
+    
+    dark:
+      background_color: "#1a1a2e"
+      card_background: "#16213e"
+      primary_color: "#e94560"
+      secondary_color: "#0f3460"
+      success_color: "#00ff88"
+      danger_color: "#ff4444"
+      warning_color: "#ffaa00"
+      text_color: "#eeeeee"
+      text_secondary: "#aaaaaa"
+      button_color: "#0f3460"
+      button_text: "#ffffff"
+      input_background: "#16213e"
+      input_border: "#0f3460"
+      divider_color: "#0f3460"
+      fonts:
+        family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+        size_small: "12px"
+        size_normal: "15px"
+        size_large: "18px"
+        size_title: "22px"
+        size_points: "36px"
+      border_radius: "12px"
+      card_shadow: "0 2px 8px rgba(0,0,0,0.3)"
+  
+  images:
+    folder: "miniapp/images"
+    logo: ""
+    background: ""
+    icons:
+      profile: ""
+      shop: ""
+      top: ""
+      checkin: ""
+      link: ""
+      online: ""
+  
+  lists:
+    page_size: 20
+    load_type: "infinite_scroll"
+    show_loader: true
+  
+  # Экраны
+  screens:
+    home:
+      enabled: true
+      blocks_order:
+        - "profile_card"
+        - "checkin_card"
+        - "quick_actions"
+        - "recent_activity"
+      
+      profile_card:
+        show: true
+        fields:
+          - "points"
+          - "streak"
+          - "balance"
+      
+      checkin_card:
+        show: true
+        title: "🎁 Ежедневный Check-in"
+        reward_text: "+1-30 очков"
+        button_text: "🎁 ОТМЕТИТЬСЯ"
+      
+      quick_actions:
+        show: true
+        items:
+          - id: "shop"
+            icon: "🛒"
+            label: "Магазин"
+            action: "tab:shop"
+          - id: "online"
+            icon: "🟢"
+            label: "Онлайн"
+            action: "tab:online"
+          - id: "top"
+            icon: "🏆"
+            label: "Топ"
+            action: "tab:top"
+          - id: "checkin"
+            icon: "🎁"
+            label: "Check-in"
+            action: "tab:checkin"
+      
+      recent_activity:
+        show: true
+        max_items: 5
+    
+    online:
+      enabled: true
+      header:
+        title: "🟢 Игроки онлайн"
+        show_count: true
+        search_enabled: true
+      player_card:
+        fields:
+          - "name"
+          - "ping"
+          - "points"
+          - "balance"
+      sort_by: "name"
+    
+    player_profile:
+      enabled: true
+      header:
+        title: "👤 Профиль игрока"
+      info_card:
+        sections:
+          general:
+            fields:
+              - "name"
+              - "prefix"
+          economy:
+            fields:
+              - "qq_points"
+              - "cmi_balance"
+              - "playerpoints"
+          technical:
+            fields:
+              - "ping"
+              - "playtime"
+              - "telegram"
+      actions:
+        gift_points:
+          enabled: true
+          label: "🎁 Подарить очки"
+          min: 1
+        report:
+          enabled: true
+          label: "🚩 Пожаловаться"
+      bottom_buttons:
+        - id: "back_to_online"
+          text: "← К списку"
+          action: "tab:online"
+        - id: "back_to_home"
+          text: "🏠 Главная"
+          action: "tab:home"
+    
+    reports:
+      enabled: true
+      permission: "qqassist.admin.reports"
+      header:
+        title: "📋 Жалобы"
+      filters:
+        enabled: true
+        default: "pending"
+      report_card:
+        fields:
+          - "reporter"
+          - "target"
+          - "category"
+      detail:
+        actions:
+          items:
+            - id: "take"
+              text: "👀 Взять в обработку"
+            - id: "close"
+              text: "✖ Закрыть"
+            - id: "reward"
+              text: "🎁 Наградить"
+            - id: "punish"
+              text: "🔨 Наказать"
+    
+    shop:
+      enabled: true
+      header:
+        title: "🛒 Магазин"
+    
+    top:
+      enabled: true
+      header:
+        title: "🏆 Топ игроков"
+      limit: 20
+      sort_by: "points"
+    
+    checkin:
+      enabled: true
+      header:
+        title: "🎁 Ежедневный Check-in"
+  
+  bottom_nav:
+    show: true
+    style: "icons_with_labels"
+    items:
+      - id: "home"
+        icon: "🏠"
+        label: "Главная"
+        action: "tab:home"
+      - id: "shop"
+        icon: "🛒"
+        label: "Магазин"
+        action: "tab:shop"
+      - id: "online"
+        icon: "🟢"
+        label: "Онлайн"
+        action: "tab:online"
+      - id: "top"
+        icon: "🏆"
+        label: "Топ"
+        action: "tab:top"
+      - id: "profile"
+        icon: "👤"
+        label: "Профиль"
+        action: "tab:profile"
+  
+  custom_css: ""
+
+# ============================================
+# НАСТРОЙКИ ЖАЛОБ
+# ============================================
+reports:
+  cooldown_seconds: 60
+  notify_staff: true
+  
+  # Команды для наказания (из Mini App админом)
+  punishments:
+    warn:
+      label: "🚩 Предупреждение"
+      command: "warn %player% %reason%"
+      durations:
+        - "10m"
+        - "30m"
+        - "1h"
+        - "6h"
+        - "1d"
+    mute:
+      label: "🔇 Мут"
+      command: "mute %player% %time% %reason%"
+      durations:
+        - "10m"
+        - "30m"
+        - "1h"
+        - "6h"
+        - "1d"
+    ban:
+      label: "🔨 Бан"
+      command: "ban %player% %time% %reason%"
+      durations:
+        - "1h"
+        - "6h"
+        - "1d"
+        - "7d"
+        - "30d"
+    jail:
+      label: "🔒 Тюрьма"
+      command: "cmi jail %player% %time%"
+      durations:
+        - "10m"
+        - "30m"
+        - "1h"
+
+# ============================================
+# НАГРАДЫ ЗА ЖАЛОБУ
+# ============================================
+report_rewards:
+  enabled: true
+  min: 5
+  max: 50
