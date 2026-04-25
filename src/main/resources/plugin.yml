@@ -1,5 +1,5 @@
 name: QQAssist
-version: ${project.version}
+version: 1.0.0
 main: ru.allfire.qqassist.QQAssist
 api-version: '1.21'
 author: AllF1RE
