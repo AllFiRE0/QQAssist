@@ -15,6 +15,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
+      - name: Check file structure
+        run: |
+          echo "=== Checking project structure ==="
+          echo "Looking for QQAssist.java:"
+          find . -name "QQAssist.java"
+          echo ""
+          echo "=== Full java source tree ==="
+          find src -name "*.java" | sort
+          echo ""
+          echo "=== Looking for package declaration in QQAssist.java ==="
+          find . -name "QQAssist.java" -exec head -1 {} \;
+      
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
