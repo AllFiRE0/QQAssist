@@ -1,0 +1,48 @@
+name: QQAssist
+version: 1.0.0
+main: ru.allfire.qqassist.QQAssist
+api-version: '1.21'
+author: AllF1RE
+description: Telegram Mini App bot with check-in, shop, reports, and chat bot
+
+softdepend:
+  - PlaceholderAPI
+  - CMI
+  - PlayerPoints
+
+commands:
+  qqassist:
+    aliases: [qq, qqa]
+    permission: qqassist.use
+  report:
+    aliases: [rep]
+    permission: qqassist.report
+  checkin:
+    permission: qqassist.use
+  qqpoints:
+    aliases: [qqp]
+    permission: qqassist.use
+  qqshop:
+    permission: qqassist.use
+  qqlink:
+    permission: qqassist.use
+  qqunlink:
+    permission: qqassist.use
+  qqadmin:
+    permission: qqassist.admin
+
+permissions:
+  qqassist.use:
+    default: true
+  qqassist.report:
+    default: true
+  qqassist.admin:
+    default: op
+  qqassist.admin.reports:
+    default: op
+  qqassist.admin.points:
+    default: op
+  qqassist.bypass.chat:
+    default: op
+  qqassist.vip:
+    default: false
