@@ -1,0 +1,36 @@
+categories:
+  cheating:
+    id: "cheating"
+    icon: "🎯"
+    label: "Читы"
+    color: "var(--danger-color)"
+    
+  offensive:
+    id: "offensive"
+    icon: "💬"
+    label: "Оскорбления"
+    color: "var(--warning-color)"
+    
+  griefing:
+    id: "griefing"
+    icon: "🔨"
+    label: "Гриферство"
+    color: "var(--danger-color)"
+    
+  interference:
+    id: "interference"
+    icon: "🚫"
+    label: "Помеха игре"
+    color: "var(--warning-color)"
+    
+  bug_abuse:
+    id: "bug_abuse"
+    icon: "🐛"
+    label: "Использование багов"
+    color: "var(--danger-color)"
+    
+  other:
+    id: "other"
+    icon: "📋"
+    label: "Другое"
+    color: "var(--text-secondary)"
