@@ -1,0 +1,59 @@
+# QQAssist - Language Configuration
+# Автор: AllF1RE
+
+prefix: "&8[&a&lQQ&8] &7»"
+
+messages:
+  # Общие
+  no_permission: "%prefix% &cНет прав"
+  player_not_found: "%prefix% &cИгрок не найден"
+  player_offline: "%prefix% &cИгрок не в сети"
+  reload_success: "%prefix% &aКонфигурация перезагружена за %time%ms"
+  unknown_command: "%prefix% &cНеизвестная команда. /qq help"
+  
+  # Привязка
+  link_usage: "%prefix% &cИспользование: /qqlink <код из Telegram>"
+  link_success: "%prefix% &aАккаунт привязан к Telegram! Теперь вам доступен Mini App"
+  link_already: "%prefix% &cАккаунт уже привязан"
+  link_invalid_code: "%prefix% &cНеверный код привязки"
+  unlink_success: "%prefix% &aАккаунт отвязан от Telegram"
+  
+  # Check-in
+  checkin_success: "%prefix% &aПолучено &f%points% &aочков! Баланс: &f%balance%"
+  checkin_cooldown: "%prefix% &cСледующий check-in через &f%time%"
+  checkin_not_linked: "%prefix% &cПривяжите аккаунт в Telegram: получите код через Mini App → /qqlink <код>"
+  
+  # Очки
+  points_balance: "%prefix% &aВаш баланс: &f%points% &aочков"
+  points_gift_sent: "%prefix% &aВы подарили &f%amount% &aочков игроку &f%player%"
+  points_gift_received: "%prefix% &aИгрок &f%sender% &aподарил вам &f%amount% &aочков!"
+  points_not_enough: "%prefix% &cНедостаточно очков"
+  points_cant_self: "%prefix% &cНельзя подарить очки самому себе"
+  
+  # Жалобы
+  report_usage: "%prefix% &cИспользование: /report <игрок> <причина>"
+  report_categories: "%prefix% &7Категории: читы, оскорбления, гриферство, помеха игре, баги"
+  report_success: "%prefix% &aЖалоба #%id% отправлена! Спасибо за бдительность"
+  report_cooldown: "%prefix% &cЖалобу можно отправлять раз в %time%"
+  report_cant_self: "%prefix% &cНельзя пожаловаться на себя"
+  
+  # Магазин
+  shop_buy_success: "%prefix% &aКуплено: &f%item% &aза &f%cost% &aочков!"
+  shop_not_enough: "%prefix% &cНедостаточно очков. Нужно %cost%, у вас %balance%"
+  shop_cooldown: "%prefix% &cТовар можно купить раз в %time%"
+  
+  # Админ
+  admin_points_reset: "%prefix% &aОчки игрока &f%player% &aсброшены"
+  admin_points_set: "%prefix% &aУстановлено &f%points% &aочков для &f%player%"
+  admin_points_add: "%prefix% &aДобавлено &f%points% &aочков для &f%player%"
+  admin_points_take: "%prefix% &aЗабрано &f%points% &aочков у &f%player%"
+  admin_punish_success: "%prefix% &aИгрок &f%player% &aнаказан: &f%type% &7(%time%)"
+  
+  # Время
+  time_second: "сек"
+  time_minute: "мин"
+  time_hour: "ч"
+  time_day: "дн"
+  time_week: "нед"
+  time_month: "мес"
+  time_never: "Никогда"
