@@ -1,0 +1,178 @@
+# ============================================
+# QQAssist - Telegram Bot Responses
+# ============================================
+
+# ============================================
+# НАСТРОЙКИ
+# ============================================
+settings:
+  # Глобальный кулдаун на ответы (в секундах) — бот не ответит пользователю чаще
+  global_cooldown_seconds: 5
+
+  # Автоудаление сообщений бота через N секунд (0 = не удалять)
+  auto_delete_seconds: 0
+
+  # Максимальная длина сообщения
+  max_message_length: 500
+
+  # Игнорировать сообщения от самого бота
+  ignore_self: true
+
+  # Логировать все входящие сообщения
+  log_messages: true
+
+# ============================================
+# КОМАНДЫ БОТА
+# ============================================
+commands:
+  checkin:
+    aliases: ["/checkin", "checkin", "чек", "чекин", "/daily", "daily"]
+    cooldown_hours: 24
+    auto_delete_seconds: 0  # 0 = использовать глобальную настройку
+    rewards:
+      min: 1
+      max: 30
+    messages:
+      success: "🎁 Вы получили %points% очков! Баланс: %balance% ⭐"
+      cooldown: "⏳ Следующий check-in через %time%"
+      not_linked: "❌ Сначала привяжите аккаунт: /link <ник>"
+
+  points:
+    aliases: ["/points", "points", "очки", "/balance", "balance", "/qp"]
+    auto_delete_seconds: 15
+    messages:
+      balance: "⭐ Ваш баланс: %points% очков\\n📅 Серия: %streak% дн.\\n🎁 Подарено: %gifted% | Получено: %received%"
+      not_linked: "❌ Сначала привяжите аккаунт"
+
+  profile:
+    aliases: ["/profile", "profile", "профиль", "/me"]
+    auto_delete_seconds: 30
+    messages:
+      info: "👤 %player_name%\\n━━━━━━━━━━━━━━━━━━━━\\n⭐ Очков: %points%\\n📅 Серия: %streak% дн.\\n🎁 Подарено: %gifted% | Получено: %received%\\n🕐 Всего check-in: %total%\\n📱 Telegram: %linked%"
+      not_linked: "❌ Аккаунт не привязан"
+
+  help:
+    aliases: ["/help", "help", "помощь", "/start", "команды"]
+    auto_delete_seconds: 60
+    messages:
+      help: "📋 Доступные команды:\\n/checkin — ежедневная отметка\\n/points — баланс очков\\n/profile — ваш профиль\\n/link <ник> — привязать аккаунт\\n/top — топ игроков\\n/online — игроки онлайн"
+
+  top:
+    aliases: ["/top", "top", "топ", "лидеры"]
+    auto_delete_seconds: 30
+    messages:
+      header: "🏆 Топ игроков:"
+      format: "#%pos% %name% — %points% ⭐"
+      empty: "Нет данных"
+
+  online:
+    aliases: ["/online", "online", "онлайн", "игроки"]
+    auto_delete_seconds: 20
+    messages:
+      header: "🟢 Онлайн (%count%):"
+      format: "👤 %name% | 📶 %ping%ms | ⭐ %points%"
+      empty: "Нет игроков онлайн"
+
+  link:
+    aliases: ["/link", "link", "привязать"]
+    auto_delete_seconds: 0
+    messages:
+      usage: "Использование: /link <никнейм>"
+      success: "✅ Код привязки: %code%\\nВведите в игре: /qqlink %code%\\nКод действителен 5 минут"
+      already_linked: "❌ Этот аккаунт уже привязан"
+      player_not_found: "❌ Игрок не найден на сервере"
+
+  unlink:
+    aliases: ["/unlink", "unlink", "отвязать"]
+    auto_delete_seconds: 10
+    messages:
+      success: "✅ Аккаунт отвязан"
+      not_linked: "❌ Аккаунт не привязан"
+      confirm_in_game: "ℹ️ Для отвязки введите /qqunlink в игре"
+
+# ============================================
+# АВТООТВЕТЫ (ЧАТ-БОТ)
+# ============================================
+rules:
+  greeting:
+    priority: 100
+    cooldown_ticks: 200  # 10 секунд между ответами на приветствия
+    auto_delete_seconds: 0
+    questions:
+      exact: ["привет", "здравствуй", "здарова", "прив", "ку", "добрый день", "доброе утро", "добрый вечер"]
+      regex: ["(?i)хай", "(?i)hello", "(?i)hi", "(?i)hey"]
+      contains: []
+    random_answers:
+      - "Привет, %player_name%! 👋"
+      - "Здравствуй! Как дела?"
+      - "Приветствую, %player_name%!"
+      - "Ку-ку! 🦊"
+      - "Добро пожаловать!"
+
+  how_are_you:
+    priority: 80
+    cooldown_ticks: 300  # 15 секунд
+    auto_delete_seconds: 10
+    questions:
+      exact: ["как дела", "как ты", "как жизнь", "как настроение", "чё как"]
+      regex: ["(?i)how are you", "(?i)how r u"]
+      contains: []
+    random_answers:
+      - "Всё отлично! А у тебя?"
+      - "Супер! Как сам?"
+      - "Работаю, не жужжу 😄"
+      - "Лучше всех! Спасибо что спросил ❤"
+
+  thanks:
+    priority: 70
+    cooldown_ticks: 200
+    auto_delete_seconds: 10
+    questions:
+      exact: ["спасибо", "спс", "благодарю", "спасиб", "сяб"]
+      regex: ["(?i)thanks", "(?i)thx", "(?i)thank you"]
+      contains: []
+    random_answers:
+      - "Пожалуйста! ❤"
+      - "Всегда рад помочь!"
+      - "Не за что 😊"
+
+  who_are_you:
+    priority: 60
+    cooldown_ticks: 600  # 30 секунд
+    auto_delete_seconds: 20
+    questions:
+      exact: ["ты кто", "кто ты", "что ты умеешь", "что ты можешь", "как тебя зовут"]
+      regex: []
+      contains: []
+    random_answers:
+      - "Я QQAssist бот! Отвечаю на вопросы и помогаю с сервером 🦊"
+      - "Я помощник сервера! Пиши /help для списка команд"
+      - "Я виртуальный ассистент этого сервера. Чем могу помочь?"
+
+  joke:
+    priority: 50
+    cooldown_ticks: 1200  # 60 секунд
+    auto_delete_seconds: 30
+    questions:
+      exact: ["анекдот", "шутка", "рассмеши", "шутку", "расскажи шутку"]
+      regex: ["(?i)joke", "(?i)funny"]
+      contains: []
+    random_answers:
+      - "Почему крипер не ходит на свидания? Боится взорвать отношения 💥"
+      - "Стив заходит в бар... и крафтит стол. Бармен: \"Эй, мы тут не строим!\""
+      - "Эндермен взял блок земли. Теперь у него грязные руки 🖤"
+      - "Скелет стреляет из лука. Почему? Потому что у него нет арбалета 🤷"
+      - "Зомби: \"Мозгиии...\" Игрок: \"У меня их нет, я играю на Paper\" 🧟"
+
+  goodbye:
+    priority: 90
+    cooldown_ticks: 200
+    auto_delete_seconds: 10
+    questions:
+      exact: ["пока", "до свидания", "прощай", "ухожу", "бб"]
+      regex: ["(?i)bye", "(?i)goodbye", "(?i)bb"]
+      contains: []
+    random_answers:
+      - "Пока! Возвращайся скорее 👋"
+      - "До встречи, %player_name%!"
+      - "Счастливо! 🦊"
