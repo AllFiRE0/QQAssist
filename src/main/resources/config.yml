@@ -1,4 +1,8 @@
-# Режим отладки
+# ============================================
+# QQAssist - Main Configuration
+# Версия: 1.0.0
+# ============================================
+
 debug: false
 
 # ============================================
@@ -16,7 +20,7 @@ database:
     password: ""
 
 # ============================================
-# ЧАТ-БОТ
+# ЧАТ-БОТ (ИГРОВОЙ ЧАТ)
 # ============================================
 chatbot:
   enabled: true
@@ -37,16 +41,50 @@ chatbot:
 # ============================================
 telegram:
   enabled: false
+  
+  # Токен TgBridge (найди в конфиге TgBridge: plugins/TgBridge/config.json)
   tgbridge:
     token: "your_token_here"
+    # HTTP-порт который слушает TgBridge (обычно 45678)
     port: 45678
+
+  # Настройки телеграм-бота
+  settings:
+    # Глобальный кулдаун между ЛЮБЫМИ ответами бота одному пользователю (сек)
+    global_cooldown_seconds: 5
+    # Автоудаление сообщений бота (0 = не удалять)
+    auto_delete_seconds: 30
+
+  # Чаты и топики
+  # chat_id можно узнать:
+  # - Для личных сообщений: ID пользователя (число)
+  # - Для групп: отрицательное число (-100...)
+  # - Для супергрупп: отрицательное число (-100...)
+  # topic_id: ID топика (0 = обычный чат без топиков)
   chats:
-    global: "-1001111111111"
-    admin: "-1002222222222"
-    reports: "-1003333333333"
+    global:
+      chat_id: ""
+      topic_id: 0
+    
+    admin:
+      chat_id: ""
+      topic_id: 0
+    
+    reports:
+      chat_id: ""
+      topic_id: 0
+    
+    logs:
+      chat_id: ""
+      topic_id: 0
+
+  # Вебхук для приёма сообщений от TgBridge
+  webhook:
+    enabled: false
+    path: "/tgbridge/webhook"
 
 # ============================================
-# MINI APP
+# MINI APP HTTP СЕРВЕР
 # ============================================
 miniapp:
   http_server:
@@ -116,42 +154,49 @@ miniapp:
     folder: "miniapp/images"
     logo: ""
     background: ""
-    icons:
-      profile: ""
-      shop: ""
-      top: ""
-      checkin: ""
-      link: ""
-      online: ""
   
   lists:
     page_size: 20
     load_type: "infinite_scroll"
-    show_loader: true
   
-  # Экраны
+  # Нижняя панель
+  bottom_nav:
+    show: true
+    style: "icons_with_labels"
+    items:
+      - id: "home"
+        icon: "🏠"
+        label: "Главная"
+        action: "tab:home"
+      - id: "shop"
+        icon: "🛒"
+        label: "Магазин"
+        action: "tab:shop"
+      - id: "online"
+        icon: "🟢"
+        label: "Онлайн"
+        action: "tab:online"
+      - id: "top"
+        icon: "🏆"
+        label: "Топ"
+        action: "tab:top"
+      - id: "profile"
+        icon: "👤"
+        label: "Профиль"
+        action: "tab:profile"
+  
   screens:
     home:
       enabled: true
-      blocks_order:
-        - "profile_card"
-        - "checkin_card"
-        - "quick_actions"
-        - "recent_activity"
-      
+      blocks_order: ["profile_card", "checkin_card", "quick_actions", "recent_activity"]
       profile_card:
         show: true
-        fields:
-          - "points"
-          - "streak"
-          - "balance"
-      
+        fields: ["points", "streak", "balance"]
       checkin_card:
         show: true
         title: "🎁 Ежедневный Check-in"
         reward_text: "+1-30 очков"
         button_text: "🎁 ОТМЕТИТЬСЯ"
-      
       quick_actions:
         show: true
         items:
@@ -171,7 +216,6 @@ miniapp:
             icon: "🎁"
             label: "Check-in"
             action: "tab:checkin"
-      
       recent_activity:
         show: true
         max_items: 5
@@ -183,11 +227,7 @@ miniapp:
         show_count: true
         search_enabled: true
       player_card:
-        fields:
-          - "name"
-          - "ping"
-          - "points"
-          - "balance"
+        fields: ["name", "ping", "points", "balance"]
       sort_by: "name"
     
     player_profile:
@@ -197,19 +237,11 @@ miniapp:
       info_card:
         sections:
           general:
-            fields:
-              - "name"
-              - "prefix"
+            fields: ["name", "prefix"]
           economy:
-            fields:
-              - "qq_points"
-              - "cmi_balance"
-              - "playerpoints"
+            fields: ["qq_points", "cmi_balance", "playerpoints"]
           technical:
-            fields:
-              - "ping"
-              - "playtime"
-              - "telegram"
+            fields: ["ping", "playtime", "telegram"]
       actions:
         gift_points:
           enabled: true
@@ -235,10 +267,7 @@ miniapp:
         enabled: true
         default: "pending"
       report_card:
-        fields:
-          - "reporter"
-          - "target"
-          - "category"
+        fields: ["reporter", "target", "category"]
       detail:
         actions:
           items:
@@ -267,33 +296,6 @@ miniapp:
       enabled: true
       header:
         title: "🎁 Ежедневный Check-in"
-  
-  bottom_nav:
-    show: true
-    style: "icons_with_labels"
-    items:
-      - id: "home"
-        icon: "🏠"
-        label: "Главная"
-        action: "tab:home"
-      - id: "shop"
-        icon: "🛒"
-        label: "Магазин"
-        action: "tab:shop"
-      - id: "online"
-        icon: "🟢"
-        label: "Онлайн"
-        action: "tab:online"
-      - id: "top"
-        icon: "🏆"
-        label: "Топ"
-        action: "tab:top"
-      - id: "profile"
-        icon: "👤"
-        label: "Профиль"
-        action: "tab:profile"
-  
-  custom_css: ""
 
 # ============================================
 # НАСТРОЙКИ ЖАЛОБ
@@ -302,7 +304,6 @@ reports:
   cooldown_seconds: 60
   notify_staff: true
   
-  # Команды для наказания (из Mini App админом)
   punishments:
     warn:
       label: "🚩 Предупреждение"
